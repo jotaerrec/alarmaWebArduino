@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2:wght@400;500;600;700;800&display=swap');
+
+body{
+    user-select:text;
+    background-color: #000511;
+    background: url("/images/arduino.jpg") 50% fixed;
+    background-size: cover;
+    font-family: 'Baloo Tammudu 2', cursive;
+
+}
+.wrapper{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(14, 53, 145, 0.6);
+}
+body::-webkit-scrollbar{
+    width: 7px;
+}
+body::-webkit-scrollbar-thumb{
+    background-color: #dc3545;
+    border-radius: 5px;
+}
+a{
+    text-decoration: none;
+    outline: none;
+}
+#btn-login{
+    outline: none;
+}
+button{
+    text-decoration: none;
+    outline: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select:none;
+}
+input{
+    outline: none;
+}

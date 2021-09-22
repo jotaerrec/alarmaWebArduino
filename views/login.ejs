@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/final.css" rel="stylesheet">
+    <link href="/stylesheets/login/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <title>Login</title>
+</head>
+<body>
+    <script>
+        
+        var queryString = window.location.search;
+        var urlParams = new URLSearchParams(queryString);
+        error1 = urlParams.get('error');
+        console.log(error1+"hola")
+    </script>
+    <div class="wrapper">
+        <div class="h-full m-auto flex justify-center items-center">
+            <form action="/users/log" method="POST" class="login bg-white rounded-md border-gray-600 border p-8 px-5 mx-auto w-80">
+                
+                <% if(error.length >0){%>
+                    <div class=" w-full bg-red-500 pt-2 -mt-4 text-center rounded-lg mb-5">
+                        <h1 class="font-semibold text-xl text-gray-50 " >
+                            <%=error%>
+                        </h1>   
+                    </div>
+                <%}%>
+                <p class="title mb-4 font-bold text-4xl">Log in</p>
+                <i class="fa fa-user flex"> </i><p class=" mx-2 inline-flex">Username</p>
+                <input name="email" class="block p-1 w-full mb-3 rounded-md border border-gray-300 focus:border-gray-900" type="text" autofocus />
+                <i class="fa fa-key flex"></i> <p class=" mx-2 inline-flex">Password</p>
+                <input name="password" class="block p-1 w-full mb-3 rounded-md border border-gray-300 focus:border-gray-900" type="password" />
+                
+                <a href="#">Forgot your password?</a>
+                <button id="btn-login" type="submit" class="w-full flex align-middle justify-center self-center text-center rounded-3xl h-10 bg-palette-100 my-2 mx-auto p-2 font-semibold text-lg bg-green-500 hover:bg-green-600 text-white hover:cursor-pointer hover:duration-1000 focus:bg-green-400 transform motion-safe:hover:scale-110 transition duration-75">
+                     Login </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+<!-- <div class="cards bg-white rounded-md border-gray-600 border p-8 px-5 mx-auto  w-64" id="cards1">
+                <h1 class="text-center text-3xl mt-3 font-bold">Starter</h1>
+                <p class="text-center text-gray-400 font-semibold">(Description)<br></p>
+                <p class="price text-center font-extrabold mt-12 text-xl text-palette-300"><span
+                        class="text-lg align-top mt-8 text-black">$</span> <strong class="text-5xl text-purple-700">999</strong> USD
+                </p>
+                <button
+                    class="w-full rounded-3xl bg-palette-100 my-7 p-2 font-semibold text-lg hover:bg-palette-200 text-white hover:cursor-pointer hover:duration-1000 active:bg-palette-700 transition duration-75">
+                    <i class="fas fa-shopping-cart"></i> Purchase</button>
+                <p class="text-left text-gray-500 my-1 ">(features)</p>
+                <hr class="h-px bg-gray-600 m-auto w-3/4">
+            </div> -->

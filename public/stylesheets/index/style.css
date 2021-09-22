@@ -1,0 +1,211 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap");
+@font-face {
+  font-family: DS-DIGITAL;
+  src: url("/fonts/DS-DIGI.OTF");
+}
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
+
+body {
+  user-select: text;
+  font-family: "Noto Sans JP", sans-serif !important;
+  background-color: #00091f;
+}
+body::-webkit-scrollbar {
+  width: 7px;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #dc3545;
+  border-radius: 5px;
+}
+button,
+input,
+select,
+a {
+  text-decoration: none !important;
+  outline: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -khtml-user-select: none !important;
+  -ms-user-select: none !important;
+}
+input::placeholder,
+input,
+select {
+  text-align-last: center;
+  text-align: center;
+}
+.second-section {
+  background-color: #0099ff;
+}
+nav {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.bggif {
+  z-index: -999;
+  position: absolute;
+  margin-top: -15%;
+  max-width: 100%;
+  width: auto;
+  -webkit-mask-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(rgba(0, 0, 0, 1)),
+    to(rgba(0, 0, 0, 0))
+  );
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  overflow: hidden;
+  animation: bgx 1500ms infinite alternate;
+}
+.shine {
+  background: linear-gradient(
+    60deg,
+    #dd852c,
+    #da543a,
+    #be3749,
+    #843d91,
+    #48299e,
+    #3f32af,
+    #068aa1,
+    #349786
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  -webkit-animation: animatedgradient 5s ease-in-out infinite alternate;
+}
+
+.hour {
+  font-family: "DS-DIGITAL";
+}
+.alarma {
+  max-width: 35em;
+}
+.regist {
+  border: 1.5px solid #4caff1;
+}
+.regist button {
+  border: 2px solid #f12c2ccb;
+}
+.registerWarnings {
+  display: grid;
+  -ms-grid-columns: (1fr) [3];
+  grid-template-columns: repeat(3, 1fr);
+  -ms-grid-rows: (1fr) [2];
+  grid-template-rows: repeat(2, 1fr);
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: bold;
+}
+.registerWarnings p {
+  /* 
+  border: 0.4px solid #fff; */
+  font-size: 1.5em;
+  padding: 0.5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.selHorary {
+  margin-right: 0.4em;
+  margin-left: 0.4em;
+  border: 1px solid #06063b;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 0.2em;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  background-color: black;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.selHorary::-ms-expand {
+  color: white;
+}
+.waves1 {
+  position: absolute;
+  z-index: -10;
+  opacity: 0.6;
+}
+.waves2 {
+  position: absolute;
+  z-index: -1;
+  opacity: 0.8;
+}
+.waves3 {
+  z-index: 1;
+}
+.carta-box {
+  width: 200px;
+  height: 250px;
+  position: relative;
+  perspective: 1000px;
+}
+
+.carta-box:hover .carta {
+  transform: rotateY(180deg);
+}
+
+.carta {
+  transform-style: preserve-3d;
+  transition: all 0.5s linear;
+}
+
+.cara {
+  position: absolute;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  background-color: #1f80c02d;
+}
+
+.cara.detras {
+  transform: rotateY(180deg);
+  border-radius: 10px;
+  background-color: #1f80c02d;
+}
+@media (min-width: 1000px) {
+  .presentation {
+    height: 100vh;
+  }
+}
+@keyframes bgxr {
+  from {
+    top: -2%;
+  }
+  to {
+    top: -0.1%;
+  }
+}
+@keyframes bgx {
+  from {
+    top: -4%;
+  }
+  to {
+    top: -6%;
+  }
+}
+@media (max-width: 1000px) {
+  .bggif {
+    margin-top: auto;
+    width: 100vw;
+    overflow: hidden;
+    animation: bgxr 1800ms infinite alternate;
+  }
+}
+@keyframes animatedgradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

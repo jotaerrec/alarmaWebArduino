@@ -1,0 +1,32 @@
+const SESSION_FILE_PATH = require("../session.json") ;
+console.log(SESSION_FILE_PATH)
+let sessionData;
+if (fs.existsSync(SESSION_FILE_PATH)) {
+  sessionData = require(SESSION_FILE_PATH);
+}
+console.log(sessionData)
+
+
+/* const SESSION_FILE_PATH = 'session.data.json';
+
+// Load the session data if it has been previously saved
+let sessionData;
+if (fs.existsSync('session.data.json')) {
+  let rawdata = fs.readFileSync('session.data.json');
+  sessionData = JSON.parse(rawdata);
+}
+
+// Use the saved values
+const client = new Client({
+  session: sessionData
+});
+
+// Save session values to the file upon successful auth
+client.on('authenticated', (session) => {
+  sessionData = session;
+  fs.writeFile('session.data.json', JSON.stringify(session), function (err) {
+    if (err) {
+      console.error(err);
+    }
+  });
+}); */

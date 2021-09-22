@@ -1,0 +1,119 @@
+<!--- Ingreso de datos al form -->
+<div
+  class="
+    card
+    bg-gray-100
+    text-white
+    placeholder-gray-200
+    pt-7
+    pb-8
+    flex flex-col
+    justify-center
+    items-center
+    mx-auto
+    w-72
+    p-4
+    rounded-3xl
+    mt-10
+    border-2
+    transition
+    border-blue-500
+    hover:
+  "
+>
+  <h1 class="text-center text-black">New Component</h1>
+  <select
+    class="bg-black rounded-2xl p-2 px-4 m-2 my-4 w-56"
+    name="signal"
+    id="señal"
+    aria-placeholder="Select signal"
+  >
+    <option hidden selected value="">Elige un valor</option>
+    <option value="output">Output</option>
+    <option value="input">Input</option>
+  </select>
+  <select
+    name="inputSignal"
+    class="hidden bg-black w-56 rounded-2xl p-2 px-4 mb-1.5"
+    id="signalInput"
+  >
+    <option hidden selected value="">Elige un valor</option>
+    <option value="digital">Digital</option>
+    <option value="analogic">Analogica</option>
+  </select>
+  <select
+    name="outputComponent"
+    class="hidden bg-black w-56 rounded-2xl p-2 px-4 mb-1.5"
+    id="componente"
+  >
+    <option hidden selected value="">Elige un valor</option>
+    <option value="Led">Led</option>
+    <option value="Motor">Motor</option>
+  </select>
+
+  <input
+    class="
+      bg-black
+      rounded-2xl
+      p-2
+      px-5
+      m-2
+      w-56
+      border-transparent border-2
+      focus:ring-2 focus:ring-gray-600
+    "
+    type="text"
+    placeholder="Ingrese el pin"
+    id="pin"
+  />
+  <button
+    class="todo_button bg-red-500 rounded-xl w-32 p-2 pb-2.5 m-2"
+    id="btnform"
+  >
+    Agregar
+  </button>
+</div>
+<!--Lista con los momentaneos valores ingresados y form-->
+<form action="/led" method="POST">
+  <div class="grid grid-cols-1 grid-flow-row" id="lista">
+    <input type="hidden" value="0" id="contador" name="contador" />
+  </div>
+  <button class="bg-red-500 w-36 text-center text-white p-2" type="submit">
+    SEND DATE
+  </button>
+</form>
+
+<!--Valores en base de datos-->
+<div
+  class="
+    bg-blue-600
+    rounded-md
+    w-80
+    backdrop-filter backdrop-opacity-80
+    mx-auto
+    py-6
+    px-4
+    justify-items-center
+  "
+>
+  <div class="">
+    <% for(var i in component){%>
+    <div class="m-1 text-xl font-semibold grid grid-flow-col text-left">
+      <% if(component[i].signal == "output"){ %>
+      <p><%=component[i].signal%></p>
+      <p><%=component[i].nameComponent%></p>
+      <% if(component[i].state == "true"){ %>
+      <input type="checkbox" checked />
+      <%} else{%>
+      <input type="checkbox" />
+      <%}%>
+      <p><%=component[i].pin%></p>
+      <%} else{%>
+      <p><%=component[i].signal%></p>
+      <p><%=component[i].nameComponent%></p>
+      <p><%=component[i].pin%></p>
+      <%}%>
+    </div>
+    <% }%>
+  </div>
+</div>
