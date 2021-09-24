@@ -4,6 +4,7 @@ const five = require("johnny-five");
 const socketapi = require("../bin/socketapi");
 const message = require("../util/messages");
 const chalk = require("chalk");
+const scroll = require("lcd-scrolling");
 const log = console.log;
 /* functions.programLights(""); */
 let fecha;
@@ -52,6 +53,40 @@ myBoard.on("ready", async function () {
       }
     }
   });
+  l = new five.LCD({
+    controller: "PCF8574T",
+  });
+  scroll.setup({
+    lcd: l,
+    full: true,
+  });
+  function reloj() {
+    let fecha = new Date();
+    scroll.line(
+      1,
+      `F: ${fecha.getDate()}/${fecha.getMonth() + 1} ${functions.addZero(
+        fecha.getHours()
+      )}:${functions.addZero(fecha.getMinutes())}`
+    );
+    if (fecha.getDay() == 0) {
+      scroll.line(0, "Domingo");
+    } else if (fecha.getDay() == 1) {
+      scroll.line(0, "Lunes");
+    } else if (fecha.getDay() == 2) {
+      scroll.line(0, "Martes");
+    } else if (fecha.getDay() == 3) {
+      scroll.line(0, "Miercoles");
+    } else if (fecha.getDay() == 4) {
+      scroll.line(0, "Jueves");
+    } else if (fecha.getDay() == 5) {
+      scroll.line(0, "Viernes");
+    } else if (fecha.getDay() == 6) {
+      scroll.line(0, "Sabado");
+    }
+  }
+  setInterval(() => {
+    reloj();
+  }, 6000);
 });
 myBoard.on("error", function (err) {
   console.log(err);

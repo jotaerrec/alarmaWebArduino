@@ -4,13 +4,7 @@ const five = require("johnny-five");
 const client = require("../bin/whatsapp-web");
 const scroll = require("lcd-scrolling");
 var l;
-board.on("ready", function () {
-  l = new five.LCD({
-    controller: "PCF8574T",
-  });
-  l.clear();
-  l.home();
-});
+board.on("ready", function () {});
 
 let bool = false;
 //functiones globales
@@ -47,12 +41,12 @@ const programLights = async (
       );
     }
   } else {
-    const javito = setInterval(() => {
+    const automatic = setInterval(() => {
       showTime();
       if (bool) {
         bool = false;
         console.log("finish");
-        return clearInterval(javito);
+        return clearInterval(automatic);
       }
     }, 10000);
     let led;
