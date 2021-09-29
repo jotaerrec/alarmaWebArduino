@@ -8,33 +8,34 @@ const scroll = require("lcd-scrolling");
 const log = console.log;
 /* functions.programLights(""); */
 let fecha;
-let alarmaState;
-let devices = {};
+let leds = {};
 
 myBoard.on("ready", async function () {
   log(chalk.blue(message.GENERAL.boardReady));
-  let ldr = new five.Sensor({
-    pin: "A0",
-    freq: 250,
-  });
 
-  devices.ledd = new five.Led({ pin: 11 });
+  leds.ledSlide = new five.Led({ pin: 11 });
+
   const thermometer = new five.Thermometer({
     controller: "LM35",
     pin: "A1",
+    freq: 1000,
   });
-
   thermometer.on("change", () => {
     const { celsius, fahrenheit, kelvin } = thermometer;
     socketapi.io.emit("temp", celsius);
   });
 
+  leds.alarm = new five.Led({ pin: 7 });
+  leds.alarm.off();
+  let ldr = new five.Sensor({
+    pin: "A0",
+    freq: 250,
+  });
   let minutes = 0;
   let hours = 0;
   ldr.on("change", async function () {
     if (this.scaleTo(0, 20) > 10) {
       const date = new Date();
-
       if (date.getMinutes() - minutes >= 1 || hours != date.getHours()) {
         fecha = `La alarma se activo el ${date.getFullYear()}/${date.getMonth()}/${date.getDay()} a las ${date.getHours()}:${functions.addZero(
           date.getMinutes()
@@ -49,6 +50,7 @@ myBoard.on("ready", async function () {
             date.getMinutes()
           )}`
         );
+        leds.alarm.on();
         functions.msgSend(fecha, "5491150107717@c.us");
       }
     }
@@ -95,10 +97,11 @@ socketapi.io.on("connection", async (socket) => {
   socketapi.io.emit("ldr", fecha);
   socket.on("reset", () => {
     fecha = null;
+    leds.alarm.off();
     socket.emit("ldr", fecha);
   });
   socket.on("changeSlide", (val) => {
-    devices.ledd.brightness(val);
+    leds.ledSlide.brightness(val);
     console.log(val);
   });
   socket.on("saveHorary", async (data) => {
@@ -108,9 +111,5 @@ socketapi.io.on("connection", async (socket) => {
   });
   socket.on("clearDB", async (data) => {
     functions.deleteWarnings();
-  });
-  socket.on("sendString", (data) => {
-    functions.stringLCD(data[0], data[1]);
-    console.log("hola");
   });
 });

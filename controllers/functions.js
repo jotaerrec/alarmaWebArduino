@@ -32,7 +32,6 @@ const programLights = async (
       if (!hora) {
         return console.log("No hay horario de encendido");
       }
-      console.log(hora, "finished");
       return programLights(
         hora.initHour,
         hora.initMinutes,
@@ -45,7 +44,6 @@ const programLights = async (
       showTime();
       if (bool) {
         bool = false;
-        console.log("finish");
         return clearInterval(automatic);
       }
     }, 10000);
@@ -55,7 +53,6 @@ const programLights = async (
       date = new Date();
       h = date.getHours();
       m = date.getMinutes();
-      console.log(h + " jaja " + m + `\n ${initHour + " " + finishHour}`);
       console.log(initHour < h && finishHour > h);
       if (initHour < h && finishHour > h) {
         led.on();
@@ -65,10 +62,8 @@ const programLights = async (
           led.on();
         } else {
           led.off();
-          console.log("se apago");
         }
       }
-      console.log("finished");
     };
   }
 };
@@ -135,24 +130,6 @@ module.exports = {
       return hora;
     } else {
       return hora;
-    }
-  },
-  stringLCD: async (text1, text2) => {
-    scroll.setup({
-      lcd: l,
-      full: true,
-    });
-    if (!text2 || text2 === undefined) {
-      console.log("aki");
-      text1.length < 16 ? scroll.line(0, text1) : l.cursor(0, 0).print(text1);
-      l.cursor(0, 49);
-      scroll.line(1, "");
-    } else {
-      console.log("akisi" + text1 + " " + text2);
-      l.cursor(0, 0);
-      l.cursor(1, 0);
-      text1.length < 16 ? l.print(text1) : await scroll.line(0, text1);
-      text2.length < 16 ? l.print(text2) : await scroll.line(1, text2);
     }
   },
 };
