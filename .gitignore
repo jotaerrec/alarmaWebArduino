@@ -5,7 +5,9 @@ session.json
 sistema-de-alarmas-web-firebase-adminsdk-91a6i-ca47e20f27.json
 test.js
 .env
-public/final.css
+/public/final.css
+
+
 # Logs
 logs
 *.log
