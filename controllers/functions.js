@@ -5,6 +5,10 @@ const client = require("../bin/whatsapp-web");
 const scroll = require("lcd-scrolling");
 var l;
 board.on("ready", function () {});
+var fs = require("fs");
+var logger = fs.createWriteStream("log.txt", {
+    flags: 'a' 
+})
 
 let bool = false;
 //functiones globales
@@ -19,6 +23,7 @@ const readHorary = async () => {
     });
   return read;
 };
+
 const programLights = async (
   initHour,
   initMinutes,
@@ -69,6 +74,7 @@ const programLights = async (
 };
 
 module.exports = {
+
   msgSend: async (msg, number) => {
     const numberws = number;
     const text = msg;
@@ -77,6 +83,7 @@ module.exports = {
       console.log(err);
     });
   },
+
   dateSave: async (date, horary) => {
     var warningsRef = admin.database().ref("registerWarnings");
     var warningsRegisterRef = warningsRef.push();
@@ -84,7 +91,9 @@ module.exports = {
       date: date,
       horary: horary,
     });
+    logger.write(`Alarma activa el ${date} a las ${horary}\n`)
   },
+
   readWarnings: async () => {
     let data = admin
       .database()
@@ -96,10 +105,12 @@ module.exports = {
       });
     return data;
   },
+
   deleteWarnings: async () => {
     var warningsRef = admin.database().ref("registerWarnings");
     warningsRef.remove();
   },
+
   saveHoraryLights: async (
     initHour,
     initMinutes,
@@ -124,6 +135,7 @@ module.exports = {
   programLights: async (initHour, initMinutes, finishHour, finishMinutes) => {
     programLights(initHour, initMinutes, finishHour, finishMinutes);
   },
+
   addZero: (hora) => {
     if (hora < 10) {
       hora = `0${hora}`;
@@ -132,4 +144,5 @@ module.exports = {
       return hora;
     }
   },
+
 };

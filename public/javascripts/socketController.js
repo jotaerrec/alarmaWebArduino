@@ -70,7 +70,7 @@ socket.on("ldr", function (data) {
   } else {
     alarma.classList =
       "alarma bg-green-600 rounded-md mx-auto py-7  px-2 max-w-md md:max-w-md justify-items-center  text-center";
-    textAlarma.innerHTML = "todo cheto rey";
+    textAlarma.innerHTML = "Funciona todo correctamente";
     btnAlarma.style.display = "none";
   }
 });
@@ -86,7 +86,7 @@ function preloadFunc() {
     } else {
       alarma.classList =
         "alarma bg-green-600 rounded-md mx-auto py-7  px-2 max-w-md md:max-w-md justify-items-center text-center";
-      textAlarma.innerHTML = "todo cheto rey";
+      textAlarma.innerHTML = "Funciona todo correctamente";
       btnAlarma.style.display = "none";
     }
   });
@@ -95,7 +95,7 @@ function resetAlarma() {
   localStorage.setItem("status", false);
   alarma.classList =
     "alarma bg-green-600 rounded-md mx-auto py-7  px-2 max-w-md  md:max-w-md justify-items-center text-center";
-  textAlarma.innerHTML = "todo cheto rey";
+  textAlarma.innerHTML = "Funciona todo correctamente";
   btnAlarma.style.display = "none";
   socket.emit("reset", status);
 }

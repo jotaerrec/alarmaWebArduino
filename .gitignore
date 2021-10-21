@@ -6,8 +6,6 @@ sistema-de-alarmas-web-firebase-adminsdk-91a6i-ca47e20f27.json
 test.js
 .env
 public/final.css
-
-
 # Logs
 logs
 *.log
@@ -15,3 +13,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
+
+# managed
+**.data.json
+**.node-persist**
+# end managed

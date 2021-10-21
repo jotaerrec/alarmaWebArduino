@@ -13,8 +13,6 @@ var usersRouter = require('./routes/users');
 var app = express();
 let myBoard = require('./controllers/arduino')
 
-
-
 app.set("secretKey", "jr2021");
 
 // view engine setup
@@ -55,10 +53,5 @@ app.use(function(err, req, res, next) {
 });
 
 
-//websockets
-/* const SocketIO = require("socket.io");
-const io = SocketIO(app)
-io.on('connection', (socket)=>{
-  console.log("on", socket)
-}); */
+
 module.exports = app;

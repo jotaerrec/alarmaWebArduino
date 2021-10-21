@@ -18,7 +18,7 @@ myBoard.on("ready", async function () {
   const thermometer = new five.Thermometer({
     controller: "LM35",
     pin: "A1",
-    freq: 1000,
+    freq: 1500,
   });
   thermometer.on("change", () => {
     const { celsius, fahrenheit, kelvin } = thermometer;
@@ -37,7 +37,7 @@ myBoard.on("ready", async function () {
     if (this.scaleTo(0, 20) > 10) {
       const date = new Date();
       if (date.getMinutes() - minutes >= 1 || hours != date.getHours()) {
-        fecha = `La alarma se activo el ${date.getFullYear()}/${date.getMonth()}/${date.getDay()} a las ${date.getHours()}:${functions.addZero(
+        fecha = `La alarma se activo el ${date.getFullYear()}/${date.getMonth()+1}/${date.getDay()} a las ${date.getHours()}:${functions.addZero(
           date.getMinutes()
         )}`;
         minutes = date.getMinutes();
@@ -45,13 +45,13 @@ myBoard.on("ready", async function () {
         socketapi.io.emit("ldr", fecha);
         alarmaState = true;
         functions.dateSave(
-          `${date.getFullYear()}/${date.getMonth()}/${date.getDay()}`,
+          `${date.getFullYear()}/${date.getMonth()+1}/${date.getDay()}`,
           `${functions.addZero(date.getHours())}:${functions.addZero(
             date.getMinutes()
           )}`
         );
         leds.alarm.on();
-        functions.msgSend(fecha, "5491150107717@c.us");
+        functions.msgSend(fecha, "5491164264193@c.us");
       }
     }
   });
@@ -63,6 +63,7 @@ myBoard.on("ready", async function () {
     full: true,
   });
   function reloj() {
+    if(!fecha){
     let fecha = new Date();
     scroll.line(
       1,
@@ -85,6 +86,9 @@ myBoard.on("ready", async function () {
     } else if (fecha.getDay() == 6) {
       scroll.line(0, "Sabado");
     }
+  }else{
+    scroll.line(0,"Alarma activa")
+  }
   }
   setInterval(() => {
     reloj();
