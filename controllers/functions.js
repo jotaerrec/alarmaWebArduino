@@ -2,16 +2,12 @@ const admin = require("../bin/firebase");
 const board = require("../bin/arduinoConnection");
 const five = require("johnny-five");
 const client = require("../bin/whatsapp-web");
-const scroll = require("lcd-scrolling");
-var l;
-board.on("ready", function () {});
 var fs = require("fs");
 var logger = fs.createWriteStream("log.txt", {
-    flags: 'a' 
-})
-
+  flags: "a",
+});
 let bool = false;
-//functiones globales
+//Functiones globales
 const readHorary = async () => {
   let read = admin
     .database()
@@ -23,6 +19,8 @@ const readHorary = async () => {
     });
   return read;
 };
+
+//Funcion en desarrollo
 
 const programLights = async (
   initHour,
@@ -74,7 +72,6 @@ const programLights = async (
 };
 
 module.exports = {
-
   msgSend: async (msg, number) => {
     const numberws = number;
     const text = msg;
@@ -91,8 +88,10 @@ module.exports = {
       date: date,
       horary: horary,
     });
-    logger.write(`Alarma activa el ${date} a las ${horary}\n`)
+    logger.write(`Alarma activa el ${date} a las ${horary}\n`); // Guarda el registro en el log.txt
   },
+
+  //Funcion para leer el log de alarmas
 
   readWarnings: async () => {
     let data = admin
@@ -106,10 +105,14 @@ module.exports = {
     return data;
   },
 
+  //Reset base de datos
+
   deleteWarnings: async () => {
     var warningsRef = admin.database().ref("registerWarnings");
     warningsRef.remove();
   },
+
+  //Funcion en desarollo
 
   saveHoraryLights: async (
     initHour,
@@ -132,6 +135,8 @@ module.exports = {
     });
   },
 
+  //Funcion en desarollo
+
   programLights: async (initHour, initMinutes, finishHour, finishMinutes) => {
     programLights(initHour, initMinutes, finishHour, finishMinutes);
   },
@@ -144,5 +149,4 @@ module.exports = {
       return hora;
     }
   },
-
 };
