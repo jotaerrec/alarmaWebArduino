@@ -11,7 +11,6 @@ require('dotenv').config()
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var app = express();
-let myBoard = require('./controllers/arduino')
 
 app.set("secretKey", "jr2021");
 

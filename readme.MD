@@ -8,7 +8,7 @@ Para poder correr el proyecto, se debe ejecutar una PowerShell (Administrador) y
 
 Asi mismo el arduino debe estar cargado el Sketchbook StandardFirmata, se puede ver mas a detalle en el siguiente [LINK](http://diegorys.es/2019/11/18/primeros-pasos-con-johnny-five-y-arduino/)
 
-```{r, engine='bash', count_lines}
+```shell
 npm run compile
 ```
 
