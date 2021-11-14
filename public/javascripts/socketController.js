@@ -11,7 +11,7 @@ let finishMinutes = document.getElementById("finishMinutes");
 let temperature = document.getElementById("temperatura");
 let cardTemp = document.getElementById("cardTemp");
 let slide = document.getElementById("slide-led");
-
+let qrDiv = document.getElementById("div-qr")
 function changeSlide(value) {
   socket.emit("changeSlide", value);
 }
@@ -74,6 +74,9 @@ socket.on("ldr", function (data) {
     btnAlarma.style.display = "none";
   }
 });
+socket.on("qrcodewsp", function(data){
+  jquery("#qrcode").qrcode(data)
+})
 function preloadFunc() {
   socket.on("ldr", function (data) {
     status = data;

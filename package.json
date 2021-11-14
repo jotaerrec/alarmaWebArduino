@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "build:css": "NODE_ENV=production npx tailwind build tailwind.css -o public/final.css",
-    "compile": "npm i -g node-gyp prebuild-install windows-build-tools win-node-env & npm run build:css"
+    "compile": "npm i -g win-node-env node-gyp prebuild-install windows-build-tools & npm run build:css && npm i"
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.3.3",
