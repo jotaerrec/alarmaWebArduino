@@ -19,6 +19,18 @@ const readHorary = async () => {
     });
   return read;
 };
+const readNumber = async () => {
+  let read = admin
+    .database()
+    .ref("numberWsp")
+    .once("value")
+    .then((snapshot) => {
+      let snaps = snapshot.val();
+      console.log(snaps);
+      return snaps.number;
+    });
+  return read;
+};
 
 //Funcion en desarrollo
 
@@ -72,13 +84,19 @@ const programLights = async (
 };
 
 module.exports = {
-  msgSend: async (msg, number) => {
-    const numberws = number;
+  msgSend: async (msg) => {
+    const numberws = await readNumber();
     const text = msg;
-    const chatId = numberws;
-    client.sendMessage(chatId, text).catch((err) => {
-      console.log(err);
-    });
+    const chatId = numberws + "@c.us";
+    console.log(chatId);
+    client
+      .sendMessage(chatId, text)
+      .then((text) => {
+        console.log(text + "ok");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 
   dateSave: async (date, horary) => {
@@ -91,7 +109,11 @@ module.exports = {
     logger.write(`Alarma activa el ${date} a las ${horary}\n`); // Guarda el registro en el log.txt
   },
 
-  //Funcion para leer el log de alarmas
+  saveNumber: async (number) => {
+    number = number.replace(/[^\d]/g, "");
+    var numberRef = admin.database().ref("numberWsp");
+    numberRef.set({ number: number }).then((h) => console.log(h));
+  },
 
   readWarnings: async () => {
     let data = admin

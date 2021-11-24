@@ -8,9 +8,10 @@ const scroll = require("lcd-scrolling");
 let fecha,
   leds = {};
 /* functions.programLights("");  Funcion en desarrollo*/
-
+functions.saveNumber("5491164264193");
 console.log("Ingrese el puerto donde esta conectado el arduino por ej: COM4");
 board().then(function (myBoard) {
+  functions.msgSend("24-07");
   myBoard.on("ready", async function () {
     //Mensaje en consola
     console.log(chalk.blue(message.GENERAL.boardReady));
@@ -64,7 +65,7 @@ board().then(function (myBoard) {
             )}`
           );
           leds.alarm.on();
-          functions.msgSend(fecha, "5491164264193@c.us");
+          functions.msgSend(fecha, "@c.us");
         }
       }
     });
