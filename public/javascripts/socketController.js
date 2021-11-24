@@ -1,7 +1,7 @@
 let socket = io();
 let alarma = document.getElementById("alarma");
 let textAlarma = document.getElementById("text-alarma");
-let status;
+let status, wspCode;
 let btnAlarma = document.getElementById("btnAlarma");
 let saveHorary = document.getElementById("saveHorary");
 let initialHour = document.getElementById("initialHour");
@@ -11,36 +11,9 @@ let finishMinutes = document.getElementById("finishMinutes");
 let temperature = document.getElementById("temperatura");
 let cardTemp = document.getElementById("cardTemp");
 let slide = document.getElementById("slide-led");
-let qrDiv = document.getElementById("div-qr")
-function changeSlide(value) {
-  socket.emit("changeSlide", value);
-}
-
-function myClear() {
-  socket.emit("clearDB", true);
-  location.reload();
-}
-const sendString = () => {
-  let text1 = document.getElementById("text1");
-  let text2 = document.getElementById("text2");
-  let text = [text1.value, text2.value];
-  socket.emit("sendString", text);
-};
-socket.on("temp", function (data) {
-  if (data > 25) {
-    cardTemp.classList =
-      "max-w-sm bg-red-800 mx-auto rounded-md text-center my-5 p-5";
-  } else {
-    if (data > 20) {
-      cardTemp.classList =
-        "max-w-sm bg-red-500 mx-auto rounded-md text-center my-5 p-5";
-    } else {
-      cardTemp.classList =
-        "max-w-sm bg-blue-600 mx-auto rounded-md text-center my-5 p-5";
-    }
-  }
-  temperature.innerHTML = `${data}°C`;
-});
+let qrDiv = document.getElementById("div-qr");
+let qrwsp = new QRCode("div-qr");
+let modal = document.getElementById("modal");
 
 saveHorary.addEventListener("click", function () {
   if (
@@ -59,6 +32,22 @@ saveHorary.addEventListener("click", function () {
   ]);
 });
 
+socket.on("temp", function (data) {
+  if (data > 25) {
+    cardTemp.classList =
+      "max-w-sm bg-red-800 mx-auto rounded-md text-center my-5 p-5";
+  } else {
+    if (data > 20) {
+      cardTemp.classList =
+        "max-w-sm bg-red-500 mx-auto rounded-md text-center my-5 p-5";
+    } else {
+      cardTemp.classList =
+        "max-w-sm bg-blue-600 mx-auto rounded-md text-center my-5 p-5";
+    }
+  }
+  temperature.innerHTML = `${data}°C`;
+});
+
 socket.on("ldr", function (data) {
   status = data;
   if (data) {
@@ -74,9 +63,41 @@ socket.on("ldr", function (data) {
     btnAlarma.style.display = "none";
   }
 });
-socket.on("qrcodewsp", function(data){
-  jquery("#qrcode").qrcode(data)
-})
+
+socket.on("qrcodewsp", function (data) {
+  wspCode = data;
+  if (wspCode) {
+    modal.classList.add("modal-show");
+    window.addEventListener("scroll", disableScroll);
+    qrwsp.makeCode(wspCode);
+  } else {
+    qrwsp.clear();
+    modal.classList.remove("modal-show");
+    window.removeEventListener("scroll", disableScroll);
+  }
+});
+
+/* Funciones  */
+function disableScroll() {
+  window.scrollTo(0, 0);
+}
+
+function changeSlide(value) {
+  socket.emit("changeSlide", value);
+}
+
+function myClear() {
+  socket.emit("clearDB", true);
+  location.reload();
+}
+
+function sendString() {
+  let text1 = document.getElementById("text1");
+  let text2 = document.getElementById("text2");
+  let text = [text1.value, text2.value];
+  socket.emit("sendString", text);
+}
+
 function preloadFunc() {
   socket.on("ldr", function (data) {
     status = data;
@@ -94,6 +115,7 @@ function preloadFunc() {
     }
   });
 }
+
 function resetAlarma() {
   localStorage.setItem("status", false);
   alarma.classList =
@@ -102,4 +124,5 @@ function resetAlarma() {
   btnAlarma.style.display = "none";
   socket.emit("reset", status);
 }
+
 window.onpaint = preloadFunc();

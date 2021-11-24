@@ -5,8 +5,10 @@
     <link rel="shortcut icon" href="icon.png" />
     <link rel="stylesheet" href="/stylesheets/index/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="text/javascript" src="qrcode.js"></script>
-    <script type="text/javascript" src="jquery.qrcode.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"
+    ></script>
     <link href="/final.css" rel="stylesheet" />
     <link
       href="https://fonts.googleapis.com/css?family=Fjalla+One|Source+Sans+Pro&amp;display=swap"
@@ -92,8 +94,34 @@
 
     <!--Comienzo del proyecto-->
 
+    <!--Modal-->
+    <div class="modal" id="modal">
+      <div class="modal-content">
+        <div class="modal-info text-gray-800">
+          <div class="title-info font-bold text-xl mb-3">
+            Para vincular WhatsApp al arduino:
+          </div>
+          <ol class="ol-info text-left pl-auto lg:pl-5">
+            <li class="">Abre WhatsApp en tu teléfono</li>
+            <li class="">
+              <span>
+                Toca <strong> Menú </strong> o <strong>Configuración</strong> y
+                selecciona <strong>Dispositivos vinculados</strong></span
+              >
+            </li>
+            <li class="">
+              Cuando se active la cámara, apunta tu teléfono hacia esta pantalla
+              para escanear el código
+            </li>
+          </ol>
+        </div>
+        <h1 class="font-semibold mb-4 text-xl">Vincular wsp</h1>
+        <div class="div-qr" id="div-qr"></div>
+      </div>
+    </div>
+
     <!--Monitereo de la alarma Start-->
-    <div data-aos="fade" data-aos-delay="80" class="mt-60 lg:mt-auto">
+    <div class="mt-60 lg:mt-auto">
       <div class="w-full transition duration-1000 text-center">
         <h1 class="text-gray-200 font-bold text-lg md:text-3xl">
           Estado de la alarma:
@@ -124,11 +152,7 @@
     <!--Monitereo de la alarma end-->
 
     <!--Historial de alarma Start-->
-    <div
-      data-aos="fade"
-      data-aos-delay="80"
-      class="regist grid mx-auto p-5 rounded-md max-w-4xl m-10 text-white"
-    >
+    <div class="regist grid mx-auto p-5 rounded-md max-w-4xl m-10 text-white">
       <div class="registerWarnings">
         <p>-</p>
         <p>Fecha:</p>
@@ -159,87 +183,10 @@
     </div>
     <!--Historial de alarma End-->
 
-    <input
-      class="my-5 transform -rotate-90"
-      value="0"
-      type="range"
-      name="slide-led"
-      id="slide-led"
-      min="0"
-      max="255"
-      oninput="changeSlide(this.value)"
-      onchange="changeSlide(this.value)"
-    />
-
-    <!--Sistema de luces Start-->
-    <div
-      data-aos="fade"
-      data-aos-delay="80"
-      class="
-        hour
-        mx-0
-        md:mx-auto md:p-2
-        rounded
-        max-w-none
-        md:max-w-4xl
-        m-10
-        bg-black
-        text-center
-      "
-    >
-      <div class="flex justify-around">
-        <div>
-          <h1 class="ml-2">Hora de inicio</h1>
-          <div class="inline-flex">
-            <select class="selHorary" id="initialHour">
-              <option hidden selected value="">Elige el horario</option>
-              <% for(let i = 0; i <=24;i++) { %>
-              <option value="<%=i%>"><%=i%></option>
-              <%}%>
-            </select>
-            <p>:</p>
-            <select class="selHorary" id="initialMinutes">
-              <option hidden selected value="">Elige el minuto</option>
-              <% for(let i = 0; i <=60;i++) { %>
-              <option value="<%=i%>"><%=i%></option>
-              <%}%>
-            </select>
-          </div>
-        </div>
-        <div>
-          <h1 class="ml-2">Hora de finalizacion</h1>
-          <div class="inline-flex">
-            <select class="selHorary" id="finishHour">
-              <option hidden selected value="">Elige el horario</option>
-              <% for(let i = 0; i <=24;i++) { %>
-              <option value="<%=i%>"><%=i%></option>
-              <%}%>
-            </select>
-            <p>:</p>
-            <select class="selHorary" id="finishMinutes">
-              <option hidden selected value="">Elige el minuto</option>
-              <% for(let i = 0; i <=60;i++) { %>
-              <option value="<%=i%>"><%=i%></option>
-              <%}%>
-            </select>
-          </div>
-        </div>
-      </div>
-      <button
-        class="btn bg-red-600 rounded-md p-2 text-center my-2 mx-auto"
-        id="saveHorary"
-      >
-        Guardar horario
-      </button>
-    </div>
-    <!--Sistema de luces End-->
-
-    <div id="div-qr">
-
-    </div>
-
+    <div class="mx-auto max-w-lg"></div>
 
     <!--Sensor de temperatura Start-->
+
     <div
       class="max-w-sm bg-blue-600 mx-auto rounded-sm text-center my-5 p-5"
       id="cardTemp"
@@ -294,7 +241,7 @@
     <!---->
 
     <div class="second-section bg-accent-500">
-      <div class="title text-center py-16" data-aos="fade" data-aos-delay="80">
+      <div class="title text-center py-16">
         <h1 class="logo text-4xl font-extrabold">Proyecto arduino</h1>
 
         <p class="text-gray-300 mt-3 w-6/12 mx-auto">
@@ -304,7 +251,7 @@
         </p>
       </div>
 
-      <div class="mx-auto bg-accent-500" data-aos="fade" data-aos-delay="100">
+      <div class="mx-auto bg-accent-500">
         <h1>Objetivos</h1>
         <div
           class="
@@ -365,7 +312,7 @@
       referrerpolicy="no-referrer"
     ></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/javascripts/socketController.js"></script>
+    <script src="/javascripts/socketController.js" defer></script>
     <script src="/javascripts/index.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>

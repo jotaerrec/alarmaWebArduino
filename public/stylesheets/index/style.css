@@ -174,28 +174,75 @@ nav {
   font-family: "Poppins", sans-serif;
 }
 
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-family: "Poppins", sans-serif;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.63);
+  transform: scale(0);
+  transition: transform 0.3s;
+}
+.modal-content {
+  display: flex;
+  flex-grow: 1;
+  align-items: flex-start;
+  background-color: #fff;
+  width: 600px;
+  max-width: 60%;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.61);
+  text-align: center;
+}
+.modal-info {
+  max-width: 50%;
+  flex: none !important;
+}
+.ol-info {
+  list-style-type: decimal;
+}
+.ol-info li {
+  padding-bottom: 0.5em;
+}
+strong {
+  display: inline-block;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.div-qr {
+  display: flex;
+  flex-wrap: 1;
+  margin-left: auto;
+  align-items: center;
+  justify-content: center;
+}
+.modal-show {
+  transform: scale(1);
+}
+
 @media (min-width: 1000px) {
   .presentation {
     height: 100vh;
   }
 }
-@keyframes bgxr {
-  from {
-    top: -2%;
-  }
-  to {
-    top: -0.1%;
-  }
-}
-@keyframes bgx {
-  from {
-    top: -4%;
-  }
-  to {
-    top: -6%;
-  }
-}
 @media (max-width: 1000px) {
+  .modal-content {
+    overflow-y: scroll;
+    height: auto;
+    max-height: 80vh;
+    display: block;
+  }
+  .modal-info {
+    margin-left: auto;
+    margin-right: auto;
+  }
   .bggif {
     margin-top: auto;
     width: 100vw;
@@ -212,5 +259,22 @@ nav {
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+
+@keyframes bgxr {
+  from {
+    top: -2%;
+  }
+  to {
+    top: -0.1%;
+  }
+}
+@keyframes bgx {
+  from {
+    top: -4%;
+  }
+  to {
+    top: -6%;
   }
 }

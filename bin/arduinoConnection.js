@@ -1,17 +1,30 @@
 const five = require("johnny-five");
-let board;
-async function getBoard() {
-  if (board) return board;
+let board,
+  data = "";
 
+async function getPort() {
   var stdin = process.openStdin();
-  let data = await new Promise((resolve) =>
+  data = await new Promise((resolve) =>
     stdin.addListener("data", function (d) {
       resolve(d.toString().trim());
     })
   );
-  myBoard = new five.Board({
-    port: data,
-  });
-  return myBoard;
+  data.includes("/dev/") ? (data = data) : (data = data.toUpperCase());
+  return data;
+}
+async function getBoard(e) {
+  if (e)
+    console.log(
+      "Ese no es un puerto correspondiente, los puertos comienzan con: 'COM' o en linux : '/dev/'"
+    );
+  if (board) return board;
+  let port = await getPort();
+  if (port.includes("COM") || port.includes("/dev/")) {
+    myBoard = new five.Board({
+      port: data,
+    });
+
+    return myBoard;
+  } else return getBoard("error");
 }
 module.exports = getBoard;
